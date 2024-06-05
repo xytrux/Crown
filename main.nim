@@ -1,4 +1,4 @@
-import dimscord, dimscmd, asyncdispatch, os, strutils, dotenv
+import dimscord, dimscmd, asyncdispatch, os, strutils, dotenv, dimscord/objects
 
 load()
 
@@ -9,6 +9,8 @@ var cmd = discord.newHandler()
 proc onReady(s: Shard, r: Ready) {.event(discord).} =
     await cmd.registerCommands()
     echo "Ready as " & $r.user
+
+    await s.updateStatus(activities = @[ActivityStatus(name: "with nim")], status = "idle")
 
 proc interactionCreate (s: Shard, i: Interaction) {.event(discord).} =
     discard await cmd.handleInteraction(s, i)
