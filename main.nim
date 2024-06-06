@@ -36,4 +36,24 @@ cmd.addSlash("add") do (a: int, b: int):
     ## Adds two numbers
     await i.reply(fmt"{a} + {b} = {a + b}")
 
+cmd.addSlash("subtract") do (a: int, b: int):
+    ## Subtracts two numbers
+    await i.reply(fmt"{a} - {b} = {a - b}")
+
+cmd.addSlash("multiply") do (a: int, b: int):
+    ## Multplies two numbers
+    await i.reply(fmt"{a} * {b} = {a * b}")
+
+cmd.addSlash("divide") do (a: int, b: int):
+    ## Divides two numbers
+    await i.reply(fmt"{a} / {b} = {a / b}")
+
+cmd.addSlash("diverge") do (a: int, b: int):
+    ## Diverges two numbers
+    await i.reply(fmt"{a} div {b} = {a div b}")
+
+cmd.addSlash("modulo") do (a: int, b: int):
+    ## Multplies two numbers
+    await i.reply(fmt"{a} mod {b} = {a mod b}")
+
 waitFor discord.startSession()
