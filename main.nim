@@ -11,7 +11,6 @@ let discord = newDiscordClient(getEnv("TOKEN"))
 var cmd = discord.newHandler()
 
 proc reply(i: Interaction, msg: string) {.async.} =
-    echo i
     let response = InteractionResponse(
         kind: irtChannelMessageWithSource,
         data: some InteractionApplicationCommandCallbackData(
