@@ -70,7 +70,7 @@ cmd.addSlash("embed", guildID = dimscordDefaultGuildID) do (title: string, descr
             embeds: @[Embed(
                 title: some fmt"{title}",
                 description: some fmt"{description}",
-                color: some 0xffffff
+                color: some 0xFEEA40
             )]
         )
     )
