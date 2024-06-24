@@ -75,14 +75,40 @@ cmd.addSlash("embed", guildID = dimscordDefaultGuildID) do (title: string, descr
         )
     )
 
+type
+  CommandInfo = object
+    name: string
+    description: string
+
+var commands: seq[CommandInfo] = @[]
+
+commands.add(CommandInfo(name: "/say", description: "Says the same thing back to you"))
+commands.add(CommandInfo(name: "/embed", description: "Embeds stuff for you"))
+commands.add(CommandInfo(name: "/help", description: "Shows the help message"))
+commands.add(CommandInfo(name: "/ping", description: "Shows the bots ping"))
+commands.add(CommandInfo(name: "/add", description: "Adds two numbers"))
+commands.add(CommandInfo(name: "/subtract", description: "Subtracts two numbers"))
+commands.add(CommandInfo(name: "/multiply", description: "Multiplies two numbers"))
+commands.add(CommandInfo(name: "/divide", description: "Divides two numbers"))
+commands.add(CommandInfo(name: "/diverge", description: "Diverges two numbers"))
+commands.add(CommandInfo(name: "/modulo", description: "Modulos two numbers"))
+
 cmd.addSlash("help", guildID = dimscordDefaultGuildID) do ():
-    ## Shows help command
+    ## Shows the help message
+    var helpDescription = newSeq[string]()
+    for cmd in commands:
+        # Append each command as a new element in the sequence
+        helpDescription.add(fmt"`{cmd.name}` - {cmd.description}")
+
+    # Join the sequence elements with "\n" explicitly for the final string
+    let finalDescription = helpDescription.join("\n")
+
     await discord.api.interactionResponseMessage(i.id, i.token,
         kind = irtChannelMessageWithSource,
         response = InteractionCallbackDataMessage(
             embeds: @[Embed(
                 title: some "Help",
-                description: some "`/ping` - Shows the bots ping\n`/add` - Adds two numbers\n`/subtract` - Subtracts two numbers\n`/multiply` - Multiplies two numbers\n`/divide` - Divides two numbers\n`/diverge` - Diverges two numbers\n`/modulo` - Modulos two numbers\n`/say` - Says the same thing back to you\n`/embed` - Embeds stuff for you\n`/help` - Shows this message",
+                description: some finalDescription,
                 color: some 0xFEEA40
             )]
         )
