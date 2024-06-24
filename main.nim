@@ -75,4 +75,17 @@ cmd.addSlash("embed", guildID = dimscordDefaultGuildID) do (title: string, descr
         )
     )
 
+cmd.addSlash("help", guildID = dimscordDefaultGuildID) do ():
+    ## Shows help command
+    await discord.api.interactionResponseMessage(i.id, i.token,
+        kind = irtChannelMessageWithSource,
+        response = InteractionCallbackDataMessage(
+            embeds: @[Embed(
+                title: some "Help",
+                description: some "`/ping` - Shows the bots ping\n`/add` - Adds two numbers\n`/subtract` - Subtracts two numbers\n`/multiply` - Multiplies two numbers\n`/divide` - Divides two numbers\n`/diverge` - Diverges two numbers\n`/modulo` - Modulos two numbers\n`/say` - Says the same thing back to you\n`/embed` - Embeds stuff for you\n`/help` - Shows this message",
+                color: some 0xFEEA40
+            )]
+        )
+    )
+
 waitFor discord.startSession()
